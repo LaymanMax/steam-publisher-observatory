@@ -28,8 +28,8 @@
 ### 1. Prerequisites
 
 - **Go**: 1.24 or later
-- **Node.js**: 20 or later
-- **pnpm**: 9 or later (`npm install -g pnpm`)
+- **Node.js**: 22 or later
+- **pnpm**: 10 or later (`npm install -g pnpm`)
 
 ### 2. Build the Application
 

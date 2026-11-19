@@ -1,6 +1,7 @@
 {
   "name": "steam-publisher-observatory-frontend",
   "version": "1.0.0",
+  "type": "module",
   "description": "React + TypeScript analytical interface for Steam Publisher Observatory",
   "main": "index.js",
   "scripts": {

@@ -1,46 +1,63 @@
-## Contributing
+# Contributing to Steam Publisher Observatory
 
-We welcome contributions of all kinds to improve this project! Here's how you can get involved:
+We welcome contributions of all kinds to improve this project! Here is how you can get involved:
+
+## Workflow
 
 1. **Fork the Repository**: Start by forking the repository to your GitHub account.
 
 2. **Clone Your Fork**: Clone the forked repository to your local machine:
 
    ```bash
-   git clone <repo_url>
-   cd repo_dir
+   git clone https://github.com/<your-username>/steam-publisher-observatory.git
+   cd steam-publisher-observatory
    ```
 
-3. **Create a Branch**: Create a new branch for your feature or bug fix:
+3. **Create a Feature Branch**:
 
    ```bash
-   git checkout -b feature-name
+   git checkout -b feature/my-new-feature
    ```
 
-4. **Make Changes**: Make your changes to the codebase. Be sure to follow existing code style and conventions.
+4. **Make Changes**: Follow existing Go and TypeScript code styles and conventions.
 
-5. **Commit Changes**: Commit your changes with a clear and descriptive message:
+5. **Run Tests**:
+   - Backend tests:
+     ```bash
+     cd backend && go test -v ./...
+     ```
+   - Frontend tests:
+     ```bash
+     cd frontend && pnpm test
+     ```
+   - Verify production bundle:
+     ```bash
+     cd frontend && pnpm build
+     ```
+
+6. **Commit Changes**: Use clear and descriptive commit messages:
 
    ```bash
-   git commit -m "Add detailed description of the changes"
+   git commit -m "feat(analytics): add support for custom price tier thresholds"
    ```
 
-6. **Push Changes**: Push your changes to your fork:
+7. **Push to Your Fork**:
 
    ```bash
-   git push origin feature-name
+   git push origin feature/my-new-feature
    ```
 
-7. **Submit a Pull Request**: Open a pull request from your branch to the main repository's branch. Include a detailed description of your changes and the problem they solve.
+8. **Submit a Pull Request**: Open a pull request from your branch against the `main` branch. Provide a detailed summary of your changes, motivation, and test verification.
 
-8. **Review and Feedback**: Participate in the review process. Make any requested changes, and your contribution will be merged!
+---
 
-### Guidelines
+## Guidelines
 
-- Ensure your code follows the existing style and conventions.
-- Include tests for any new functionality or bug fixes.
-- Write clear, concise commit messages and pull request descriptions.
+- Follow standard Go formatting (`gofmt`, `go vet`).
+- Ensure all TypeScript types are strict and clean (`tsc`).
+- Include unit/integration tests for any new analytical metric or API endpoint.
+- Do not commit large Parquet files, database files (`.duckdb`), or credentials.
 
-### Issues
+## Reporting Issues
 
-Feel free to report bugs or suggest enhancements by creating an issue. Be sure to include detailed information about the problem and, if possible, steps to reproduce it.
+Feel free to report bugs or suggest enhancements by creating an issue. Include detailed information about the problem, steps to reproduce it, and the environment (OS, Go version, Node version).

@@ -1,0 +1,43 @@
+{
+  "name": "steam-publisher-observatory-frontend",
+  "version": "1.0.0",
+  "description": "React + TypeScript analytical interface for Steam Publisher Observatory",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "steam",
+    "game-analytics",
+    "publisher-intelligence",
+    "react",
+    "typescript"
+  ],
+  "author": "Rana Jahanzaib",
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.3",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.75.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.6",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@testing-library/jest-dom": "^8.0.0",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "jsdom": "^31.0.1",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  }
+}

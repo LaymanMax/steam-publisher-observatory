@@ -1,0 +1,27 @@
+{
+  "name": "steam-publisher-observatory",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio concentration and market intelligence observatory for video game publishers on Steam",
+  "scripts": {
+    "dev": "cd frontend && pnpm dev",
+    "build:frontend": "cd frontend && pnpm build",
+    "build:backend": "cd backend && go build -o bin/server cmd/server/main.go",
+    "build": "pnpm run build:frontend && pnpm run build:backend",
+    "test:frontend": "cd frontend && pnpm test",
+    "test:backend": "cd backend && go test -v ./...",
+    "test": "pnpm run test:frontend && pnpm run test:backend"
+  },
+  "keywords": [
+    "steam",
+    "game-analytics",
+    "market-intelligence",
+    "duckdb",
+    "go",
+    "react",
+    "portfolio-dependency"
+  ],
+  "author": "Rana Jahanzaib",
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.3"
+}

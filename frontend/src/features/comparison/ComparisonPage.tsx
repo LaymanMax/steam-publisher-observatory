@@ -196,7 +196,15 @@ export const ComparisonPage: React.FC = () => {
         <div className="space-y-6">
           {/* Aligned Cards Header */}
           <div
-            className={`grid grid-cols-1 md:grid-cols-${comparison.publishers.length} gap-4`}
+            className={`grid grid-cols-1 ${
+              comparison.publishers.length === 1
+                ? "md:grid-cols-1 max-w-md"
+                : comparison.publishers.length === 2
+                  ? "md:grid-cols-2"
+                  : comparison.publishers.length === 3
+                    ? "md:grid-cols-3"
+                    : "md:grid-cols-2 lg:grid-cols-4"
+            } gap-4`}
           >
             {comparison.publishers.map((p) => (
               <div

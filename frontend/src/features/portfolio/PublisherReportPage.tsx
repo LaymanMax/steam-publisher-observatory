@@ -357,7 +357,7 @@ export const PublisherReportPage: React.FC = () => {
                 Genre Distribution & Diversification
               </h3>
               <p className="text-[11px] text-slate-400">
-                Multi-genre titles weighted equally ($1/K$) so portfolio
+                Multi-genre titles weighted equally (1/K) so portfolio
                 composition sums to 100%.
               </p>
             </div>

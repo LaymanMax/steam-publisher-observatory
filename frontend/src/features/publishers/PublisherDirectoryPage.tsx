@@ -162,7 +162,7 @@ export const PublisherDirectoryPage: React.FC = () => {
             <thead className="bg-[#090d16] text-slate-400 border-b border-[#1e293b] font-mono text-[11px] select-none">
               <tr>
                 <th
-                  onClick={() => handleSort("catalog_size")}
+                  onClick={() => handleSort("name")}
                   className="cursor-pointer hover:text-cyan-400 py-3"
                 >
                   <div className="flex items-center space-x-1">

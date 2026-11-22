@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,6 +24,18 @@ func main() {
 	log.Println("Starting Steam Publisher Observatory backend...")
 
 	cfg := config.Load()
+
+	portFlag := flag.Int("port", cfg.Port, "HTTP server port")
+	hostFlag := flag.String("host", cfg.Host, "HTTP server bind host")
+	dataDirFlag := flag.String("datadir", cfg.DataDir, "Directory for dataset and database files")
+	dbPathFlag := flag.String("db", cfg.DBPath, "Path to DuckDB database file")
+	flag.Parse()
+
+	cfg.Port = *portFlag
+	cfg.Host = *hostFlag
+	cfg.DataDir = *dataDirFlag
+	cfg.DBPath = *dbPathFlag
+
 	log.Printf("Loaded config: Port=%d, Host=%s, DataDir=%s, DBPath=%s",
 		cfg.Port, cfg.Host, cfg.DataDir, cfg.DBPath)
 

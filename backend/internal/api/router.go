@@ -1,6 +1,7 @@
 package api
 
 import (
+	"bytes"
 	"encoding/json"
 	"net/http"
 	"os"
@@ -128,14 +129,24 @@ func (s *Server) Router() http.Handler {
 	distDirs := []string{"./frontend/dist", "../frontend/dist", "./dist"}
 	for _, d := range distDirs {
 		if fi, err := os.Stat(d); err == nil && fi.IsDir() {
-			fs := http.FileServer(http.Dir(d))
+			distDir := d
 			r.Get("/*", func(w http.ResponseWriter, req *http.Request) {
-				target := filepath.Join(d, filepath.Clean(req.URL.Path))
-				if fi, err := os.Stat(target); os.IsNotExist(err) || fi.IsDir() {
-					http.ServeFile(w, req, filepath.Join(d, "index.html"))
+				target := filepath.Join(distDir, filepath.Clean(req.URL.Path))
+				info, err := os.Stat(target)
+				if os.IsNotExist(err) || (err == nil && info.IsDir()) {
+					target = filepath.Join(distDir, "index.html")
+					info, err = os.Stat(target)
+				}
+				if err != nil {
+					http.NotFound(w, req)
 					return
 				}
-				fs.ServeHTTP(w, req)
+				data, err := os.ReadFile(target)
+				if err != nil {
+					http.Error(w, "failed to read static asset", http.StatusInternalServerError)
+					return
+				}
+				http.ServeContent(w, req, info.Name(), info.ModTime(), bytes.NewReader(data))
 			})
 			break
 		}

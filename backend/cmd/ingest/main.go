@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
-	"os"
 	"path/filepath"
 	"time"
 
@@ -15,9 +15,21 @@ import (
 
 func main() {
 	cfg := config.Load()
-	targetPath := filepath.Join(cfg.DataDir, "train-00000-of-00001.parquet")
-	if len(os.Args) > 1 {
-		targetPath = os.Args[1]
+	defaultParquet := filepath.Join(cfg.DataDir, "train-00000-of-00001.parquet")
+
+	parquetFlag := flag.String("parquet", "", "Path to input Parquet dataset file")
+	dbFlag := flag.String("db", cfg.DBPath, "Path to DuckDB database file")
+	dataDirFlag := flag.String("datadir", cfg.DataDir, "Directory for dataset and database files")
+	flag.Parse()
+
+	cfg.DataDir = *dataDirFlag
+	cfg.DBPath = *dbFlag
+
+	targetPath := defaultParquet
+	if *parquetFlag != "" {
+		targetPath = *parquetFlag
+	} else if flag.NArg() > 0 {
+		targetPath = flag.Arg(0)
 	}
 
 	log.Printf("Connecting to DuckDB database at %s...", cfg.DBPath)

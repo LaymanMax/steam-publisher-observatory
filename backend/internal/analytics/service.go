@@ -214,6 +214,8 @@ func (s *Service) ListPublishers(ctx context.Context, filter PublisherFilter) ([
 	// Order by
 	sortCol := "catalog_size"
 	switch filter.SortBy {
+	case "name":
+		sortCol = "name"
 	case "catalog_size":
 		sortCol = "catalog_size"
 	case "catalog_owners_midpoint":
@@ -226,6 +228,8 @@ func (s *Service) ListPublishers(ctx context.Context, filter PublisherFilter) ([
 		sortCol = "developer_count"
 	case "genre_count":
 		sortCol = "genre_count"
+	case "ownership_coverage":
+		sortCol = "ownership_coverage"
 	case "total_reviews":
 		sortCol = "total_reviews"
 	case "avg_positive_share":

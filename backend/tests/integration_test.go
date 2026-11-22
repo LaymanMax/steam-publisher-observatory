@@ -6,6 +6,7 @@ import (
 	"math"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/laymanmax/steam-publisher-observatory/backend/internal/analytics"
@@ -313,5 +314,37 @@ func TestIntegration_JSONReportStructure(t *testing.T) {
 	}
 	if rep["metric_definitions"] == nil {
 		t.Errorf("expected metric_definitions in JSON export")
+	}
+}
+
+func TestIntegration_PublisherSortingAndExportQueryParam(t *testing.T) {
+	db, svc, server := setupTestEnvironment(t)
+	seedTestFixtures(t, db)
+
+	// Test sorting by ownership_coverage ascending (Mono Publisher has 0% coverage, Titans has 100%)
+	pubs, _, err := svc.ListPublishers(context.Background(), analytics.PublisherFilter{
+		SortBy:    "ownership_coverage",
+		SortOrder: "asc",
+	})
+	if err != nil || len(pubs) < 2 {
+		t.Fatalf("ListPublishers sorted by ownership_coverage failed: %v", err)
+	}
+	if pubs[0].PublisherID != "pub_mono" {
+		t.Errorf("expected pub_mono (0%% coverage) first when sorting by ownership_coverage ASC, got %s (%.1f%%)",
+			pubs[0].PublisherID, pubs[0].OwnershipCoverage)
+	}
+
+	// Test CSV export using ?q= parameter (used by frontend URL search params)
+	handler := server.Router()
+	req := httptest.NewRequest(http.MethodGet, "/api/exports/publishers.csv?q=Mono", nil)
+	rec := httptest.NewRecorder()
+	handler.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /api/exports/publishers.csv?q=Mono returned %d", rec.Code)
+	}
+	body := rec.Body.String()
+	if !strings.Contains(body, "Mono Publisher") || strings.Contains(body, "Titans Publishing") {
+		t.Errorf("expected CSV export with ?q=Mono to filter to Mono Publisher only, got:\n%s", body)
 	}
 }

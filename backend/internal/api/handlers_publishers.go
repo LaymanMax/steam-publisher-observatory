@@ -16,8 +16,13 @@ func (s *Server) handleListPublishers(w http.ResponseWriter, r *http.Request) {
 	limit, _ := strconv.Atoi(q.Get("limit"))
 	offset, _ := strconv.Atoi(q.Get("offset"))
 
+	query := q.Get("query")
+	if query == "" {
+		query = q.Get("q")
+	}
+
 	filter := analytics.PublisherFilter{
-		Query:     q.Get("query"),
+		Query:     query,
 		MinGames:  minGames,
 		Genre:     q.Get("genre"),
 		SortBy:    q.Get("sort_by"),
@@ -76,8 +81,13 @@ func (s *Server) handleGetPublisherCatalog(w http.ResponseWriter, r *http.Reques
 
 	excludePlaytest := strings.EqualFold(q.Get("exclude_playtest"), "true") || q.Get("exclude_playtest") == "1"
 
+	query := q.Get("query")
+	if query == "" {
+		query = q.Get("q")
+	}
+
 	filter := analytics.CatalogFilter{
-		Query:           q.Get("query"),
+		Query:           query,
 		Genre:           q.Get("genre"),
 		DeveloperID:     q.Get("developer_id"),
 		PriceTier:       q.Get("price_tier"),

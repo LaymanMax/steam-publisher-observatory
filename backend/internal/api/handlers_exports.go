@@ -14,8 +14,13 @@ func (s *Server) handleExportPublishersCSV(w http.ResponseWriter, r *http.Reques
 	q := r.URL.Query()
 	minGames, _ := strconv.Atoi(q.Get("min_games"))
 
+	query := q.Get("query")
+	if query == "" {
+		query = q.Get("q")
+	}
+
 	filter := analytics.PublisherFilter{
-		Query:     q.Get("query"),
+		Query:     query,
 		MinGames:  minGames,
 		Genre:     q.Get("genre"),
 		SortBy:    q.Get("sort_by"),
@@ -52,11 +57,32 @@ func (s *Server) handleExportCatalogCSV(w http.ResponseWriter, r *http.Request) 
 
 	excludePlaytest := strings.EqualFold(q.Get("exclude_playtest"), "true") || q.Get("exclude_playtest") == "1"
 
+	query := q.Get("query")
+	if query == "" {
+		query = q.Get("q")
+	}
+
+	var minYear, maxYear *int
+	if y, err := strconv.Atoi(q.Get("min_year")); err == nil {
+		minYear = &y
+	}
+	if y, err := strconv.Atoi(q.Get("max_year")); err == nil {
+		maxYear = &y
+	}
+
+	var minReviews *int64
+	if rev, err := strconv.ParseInt(q.Get("min_reviews"), 10, 64); err == nil {
+		minReviews = &rev
+	}
+
 	filter := analytics.CatalogFilter{
-		Query:           q.Get("query"),
+		Query:           query,
 		Genre:           q.Get("genre"),
 		DeveloperID:     q.Get("developer_id"),
 		PriceTier:       q.Get("price_tier"),
+		MinYear:         minYear,
+		MaxYear:         maxYear,
+		MinReviews:      minReviews,
 		ExcludePlaytest: excludePlaytest,
 		SortBy:          q.Get("sort_by"),
 		SortOrder:       q.Get("sort_order"),

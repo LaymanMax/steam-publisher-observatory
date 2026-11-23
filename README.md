@@ -296,8 +296,20 @@ For deeper technical details, consult the documentation in [`docs/`](./docs):
 
 Contributions, bug reports, and analytical enhancements are welcome! Please review [CONTRIBUTING.md](./CONTRIBUTING.md) and our [Code of Conduct](./CODE_OF_CONDUCT.md) before opening a pull request.
 
-## License
+## Attribution
 
-This project is licensed under the [MIT License](./LICENSE).
 The Steam Games Dataset is published by FronkonGames under the MIT license.
 Steam and the Steam logo are trademarks of Valve Corporation. This project is not affiliated with Valve Corporation.
+
+
+## License & Custom Work
+
+[![Hire me](https://img.shields.io/badge/Open%20to%20work-work%40withrana.com-brightgreen)](mailto:work@withrana.com) [![LinkedIn](https://img.shields.io/badge/LinkedIn-workwithrana-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/workwithrana)
+[![Upwork](https://img.shields.io/badge/Upwork-Hire%20Me-14A800?style=flat&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~01bbcf6edb91a8df5f)
+[![Contra](https://img.shields.io/badge/Contra-Hire%20Me-000000?style=flat)](https://contra.com/ranajahanzaib/)
+
+**License:** MIT, see [LICENSE](LICENSE). Free for personal and commercial use.
+
+**Author:** Rana Jahanzaib (aka LaymanMax)
+
+**Need this built for your stack?** Email me what you're working on: work@withrana.com
